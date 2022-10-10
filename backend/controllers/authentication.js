@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
         where: { email: req.body.email }
     })
 
-    if (!user || !await bcrypt.compare(req.body.password, user.passwordDigest)) {
+    if (!user || !await bcrypt.compare(req.body.password, user.passwordHash)) {
         res.status(404).json({ 
             message: `Could not find a user with the provided username and password` 
         })
@@ -24,7 +24,5 @@ router.post('/', async (req, res) => {
 router.get('/profile', async (req, res) => {
     res.json(req.currentUser)
 })
-
-
 
 module.exports = router

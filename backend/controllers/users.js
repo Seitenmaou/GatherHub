@@ -12,7 +12,8 @@ router.post('/', async (req, res) => {
         role: 'user',
         passwordHash: await bcrypt.hash(password, 12)
     })
-    res.json(user)
+    //res.json(user)
+    res.redirect('/gatherhub')
 })
 
 

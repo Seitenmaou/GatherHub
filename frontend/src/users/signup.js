@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router"
 
 function SignUpForm() {
     
-	const history = useNavigate()
+	const navigate = useNavigate()
 
 // States for registration
     const [user, setUser] = useState({
@@ -24,7 +24,7 @@ function SignUpForm() {
             },
             body: JSON.stringify(user)
         })
-        history.push(`/`)
+        navigate(`/`)
     }
 
     return (

@@ -1,17 +1,22 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './home'
 import SignUp from './users/signup'
-// import Login from './users/login'
+import Login from './users/login'
+import GatherHub from './hub/gatherhub';
+import CurrentUserProvider from './contexts/CurrentUser'
 
 function App() {
   return (
+    <CurrentUserProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>} />
+          <Route path='/gatherhub' element={<GatherHub/>}/>
           <Route path='/signup' element={<SignUp/>} />
-          {/*<Route path="/login" element={<Login/>} /> */}
+          <Route path="/login" element={<Login/>} />
         </Routes>
       </BrowserRouter>
+    </CurrentUserProvider>
   );
 }
 
