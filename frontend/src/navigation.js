@@ -10,13 +10,13 @@ function Navigation() {
 
     let loginActions = (
         <>
-            <li class="nav-item">
-                <a class="nav-link active" href="#" onClick={() => navigate("/signup")}>
+            <li className="nav-item">
+                <a className="nav-link active" href="#" onClick={() => navigate("/signup")}>
                     Sign Up
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#" onClick={() => navigate("/login")}>
+            <li className="nav-item">
+                <a className="nav-link active" href="#" onClick={() => navigate("/login")}>
                     Login
                 </a>
             </li>
@@ -26,45 +26,32 @@ function Navigation() {
     if (currentUser) {
         loginActions = (
             <>
-            <li class="nav-item">
-                <a class="nav-link active" href="/" onClick={localStorage.removeItem('token')}>
-                    Logout
-                </a>
-            </li>
-            <li class="nav-item">
-                <p class="nav-link active">Logged in as {currentUser.firstName} {currentUser.lastName}</p>
-            </li>
+                <li className="nav-item">
+                    <a className="nav-link active" href="/" onClick={() => localStorage.removeItem('jwt-token')}>
+                        Logout
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <p className="nav-link active">Logged in as {currentUser.firstName} {currentUser.lastName}</p>
+                </li>
             </>
         )
     }
 
-    let addPlaceButton = null
-
-    if (currentUser?.role === 'admin'){
-        addPlaceButton = (
-            <li class="nav-item">
-                <a class="nav-link active" href="#"  onClick={() => navigate("/places/new")}>
-                    Add Place
-                </a>
-            </li>
-        )
-    }
-
     return (
-       <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" onClick={() => navigate("/gatherhub")}>
+       <nav className="navbar navbar-expand-lg bg-light">
+        <div className="container-fluid">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                    <a className="nav-link active" href="#" onClick={() => navigate("/gatherhub")}>
                         GatherHub
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" onClick={() => navigate("/profile")}>
+                <li className="nav-item">
+                    <a className="nav-link active" href="#" onClick={() => navigate("/profile")}>
                         Profile
                     </a>
                 </li>
-                {addPlaceButton}
                 {loginActions}
             </ul>
         </div>
