@@ -6,6 +6,7 @@ import GatherHub from './hub/gatherhub';
 import CurrentUserProvider from './contexts/CurrentUser'
 import Navigation from './navigation';
 import UserProfile from './users/profile';
+import PrivateRoute from './privateroute/PrivateRoute'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/gatherhub' element={<GatherHub/>}/>
-          <Route path='/profile' element={<UserProfile/>}/>
+          <Route path='/profile' element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
           <Route path='/signup' element={<SignUp/>} />
           <Route path="/login" element={<Login/>} />
         </Routes>

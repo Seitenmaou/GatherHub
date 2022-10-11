@@ -23,7 +23,6 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/profile', async (req, res) => {
-    console.log("AUTHING")
    res.json(req.currentUser)
 })
 
