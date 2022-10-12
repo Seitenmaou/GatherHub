@@ -13,7 +13,12 @@ router.post('/create', async (req, res) => {
         username: null,
         title: null,
         profession: null,
-        skillList:["","","","","",""],
+        skillList0:[""],
+        skillList1:[""],
+        skillList2:[""],
+        skillList3:[""],
+        skillList4:[""],
+        skillList5:[""],
         skillLevel:[0,0,0,0,0,0],
         maxSkillLevel:0,
         passwordHash: await bcrypt.hash(password, 12)

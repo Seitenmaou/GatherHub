@@ -22,7 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     passwordHash: DataTypes.STRING,
     title: DataTypes.STRING,
     profession: DataTypes.STRING,
-    skillList: DataTypes.ARRAY(DataTypes.STRING),
+    skillList0: DataTypes.ARRAY(DataTypes.STRING),
+    skillList1: DataTypes.ARRAY(DataTypes.STRING),
+    skillList2: DataTypes.ARRAY(DataTypes.STRING),
+    skillList3: DataTypes.ARRAY(DataTypes.STRING),
+    skillList4: DataTypes.ARRAY(DataTypes.STRING),
+    skillList5: DataTypes.ARRAY(DataTypes.STRING),
     skillLevel: DataTypes.ARRAY(DataTypes.SMALLINT),
     maxSkillLevel: DataTypes.SMALLINT
   }, {
