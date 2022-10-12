@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.get('/profile', async (req, res) => {
+router.get('/', async (req, res) => {
    res.json(req.currentUser)
 })
 

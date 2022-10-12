@@ -10,14 +10,13 @@ function SignUpForm() {
         firstName: '',
         lastName: '',
         email: '',
-        userName: '',
         password: ''
     })
 
     async function handleSubmit(e) {
         e.preventDefault()
 
-        await fetch(`${process.env.REACT_APP_SERVER_URL}users/`, {
+        await fetch(`${process.env.REACT_APP_SERVER_URL}users/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,17 +64,6 @@ function SignUpForm() {
                                 id="email"
                                 name="email"
                                 placeholder='john@doe.com'
-                            />
-
-                            <label htmlFor="userName">User Name</label>
-                            <input
-                                required
-                                value={user.userName}
-                                onChange={e => setUser({ ...user, userName: e.target.value })}
-                                className="form-control"
-                                id="userName"
-                                name="userName"
-                                placeholder='DaBestJohnDoe'
                             />
 
                             <label htmlFor="password">Password</label>

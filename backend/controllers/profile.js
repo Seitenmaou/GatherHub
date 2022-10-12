@@ -7,12 +7,22 @@ const { User } = db
 router.post('/', async (req, res) => {
     let {password, ...rest} = req.body
     
-    const user = await User.create({
-        ...rest,
-        role: 'user',
-        passwordHash: await bcrypt.hash(password, 12)
-    })
-    res.json(user)
+    // const user = await User.create({
+    //     ...rest,
+    //     role: 'user',
+    //     birthday: undefined,
+    //     gender: undefined,
+    //     softskills:{
+    //         "ARTS":0,
+    //         "SCIENCE":0,
+    //         "ATHLETICS":0,
+    //         "COMMUNICATION":0,
+    //         "ORGANIZATION":0,
+    //         "ADAPTATION":0
+    //     },
+    //     passwordHash: await bcrypt.hash(password, 12)
+    // })
+    // res.json(user)
 })
 
 

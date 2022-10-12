@@ -14,20 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    role: {
-      type: DataTypes.ENUM,
-      values: [
-        'user',
-        'admin'
-      ]
-    },
+    role: {type: DataTypes.ENUM, values: ['user', 'moderator','admin']},
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     userName: DataTypes.STRING,
     email: DataTypes.STRING,
     passwordHash: DataTypes.STRING,
-    gender: DataTypes.STRING,
-    birthday: DataTypes.DATE
+    title: DataTypes.STRING,
+    profession: DataTypes.STRING,
+    skillList: DataTypes.ARRAY(DataTypes.STRING),
+    skillLevel: DataTypes.ARRAY(DataTypes.SMALLINT),
+    maxSkillLevel: DataTypes.SMALLINT
   }, {
     sequelize,
     modelName: 'User',
