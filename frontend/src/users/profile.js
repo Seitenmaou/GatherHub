@@ -55,12 +55,13 @@ function UserProfile() {
         
 
         function prepUpdate(){//I hate this too, dont worry, ill find a recursive way eventually, IF POSTGRES ACCEPTED UNEVEN MULTIDIMETIONAL ARRAYS!!!!
-            user.skillList0 = tempSkillList[0].split(",")
-            user.skillList1 = tempSkillList[1].split(",")
-            user.skillList2 = tempSkillList[2].split(",")
-            user.skillList3 = tempSkillList[3].split(",")
-            user.skillList4 = tempSkillList[4].split(",")
-            user.skillList5 = tempSkillList[5].split(",")
+
+            if (!Array.isArray(tempSkillList[0])){user.skillList0 = tempSkillList[0].split(",")}
+            if (!Array.isArray(tempSkillList[1])){user.skillList1 = tempSkillList[1].split(",")}
+            if (!Array.isArray(tempSkillList[2])){user.skillList2 = tempSkillList[2].split(",")}
+            if (!Array.isArray(tempSkillList[3])){user.skillList3 = tempSkillList[3].split(",")}
+            if (!Array.isArray(tempSkillList[4])){user.skillList4 = tempSkillList[4].split(",")}
+            if (!Array.isArray(tempSkillList[5])){user.skillList5 = tempSkillList[5].split(",")}
 
             user.skillLevel[0] = user.skillList0.length
             if (user.skillLevel[0] > user.maxSkillLevel) {user.maxSkillLevel = user.skillLevel[0]}
