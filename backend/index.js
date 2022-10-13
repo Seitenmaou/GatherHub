@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/users', require('./controllers/users'))
+app.use('/profile', require('./controllers/profile'))
 app.use('/authentication', require('./controllers/authentication'))
 
 // Listen for Connections

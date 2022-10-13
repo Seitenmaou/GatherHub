@@ -11,7 +11,7 @@ function CurrentUserProvider({ children }) {
         const getLoggedInUser = async () => {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}authentication/`, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('jwt-token')}`
+                    'Authorization': `Bearer ${sessionStorage.getItem('jwt-token')}`
                 }
             })
             let user = await response.json()

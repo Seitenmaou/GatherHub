@@ -29,7 +29,7 @@ function LoginForm() {
 
         if (response.status === 200) {
             setCurrentUser(data.user)
-            localStorage.setItem('jwt-token', data.token)
+            sessionStorage.setItem('jwt-token', data.token)
             navigate(`/`)
         } else {
             setErrorMessage(data.message)
