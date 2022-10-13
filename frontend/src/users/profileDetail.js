@@ -75,20 +75,31 @@ function ProfileDetail() {
          }
    }
 },[userDetails])
+
+   function placeProfession(current, index){return(<p>{userDetails.profession[index]}</p>)}
    
    if(!userDetails){return<h1>Loading...</h1>}
 
    return(
       <div className="row">
+            <div className='col-sm-6'>
+               <div className='card'>
+                  <div className='card'>
+                     <h1>{(userDetails.userName||(userDetails.firstName + " " +userDetails.lastName)) + ", " + userDetails.title || ""}</h1>
+                     <h4>{userDetails.profession[0] || ""}</h4>
+                  </div>
+                  <div className='card'>
+                     <p>{userDetails.biography}</p>
+                  </div>
+                  <div className='card'>
+                     {userDetails.profession.map(placeProfession)}
+                  </div>
+               </div>
+            </div>
          <div className='col-sm-6'>
-         <h1>{(userDetails.userName||(userDetails.firstName + " " +userDetails.lastName)) + " " + userDetails.title || ""}</h1>
-         <h2>{userDetails.profession || ""}</h2>
-         </div>
-         <div className='col-sm-6'>
-
-         <div className="chart-container" style={{position:"relative", height:25+"vw", width:40+"vw"}}>
-            <canvas id="radarChart"/>
-         </div>
+            <div className="chart-container" style={{position:"relative", height:25+"vw", width:40+"vw"}}>
+               <canvas id="radarChart"/>
+            </div>
          </div>
       </div>
    )

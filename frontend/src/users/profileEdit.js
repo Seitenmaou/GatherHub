@@ -7,27 +7,33 @@ function UserProfile() {
     const  {currentUser}  = useContext(CurrentUser)
     
     const [user, setUser] = useState(currentUser)
+    const [tempSkillList, setTempSkillList]= useState([
+        user.skillList0,
+        user.skillList1,
+        user.skillList2,
+        user.skillList3,
+        user.skillList4,
+        user.skillList5
+    ])
 
     useEffect(() => {
         const getUserDetail = async () => {
            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/${currentUser.id}`)
            const resData = await response.json()
            setUser(resData)
+           setTempSkillList([
+            user.skillList0,
+            user.skillList1,
+            user.skillList2,
+            user.skillList3,
+            user.skillList4,
+            user.skillList5
+        ])
         }
         getUserDetail()
      },[currentUser.id])
 
 	const navigate = useNavigate()
-
-
-    const [tempSkillList, setTempSkillList]= useState([
-                    user.skillList0,
-                    user.skillList1,
-                    user.skillList2,
-                    user.skillList3,
-                    user.skillList4,
-                    user.skillList5
-                ])
 
     const skillCategories = [
         "Art",
@@ -69,6 +75,7 @@ function UserProfile() {
         if (!Array.isArray(tempSkillList[3])){user.skillList3 = tempSkillList[3].split(",")}
         if (!Array.isArray(tempSkillList[4])){user.skillList4 = tempSkillList[4].split(",")}
         if (!Array.isArray(tempSkillList[5])){user.skillList5 = tempSkillList[5].split(",")}
+        if (!Array.isArray(user.profession)){user.profession = user.profession.split(",")}
 
         user.skillLevel[0] = user.skillList0.length
         if (user.skillLevel[0] > user.maxSkillLevel) {user.maxSkillLevel = user.skillLevel[0]}
@@ -133,19 +140,7 @@ function UserProfile() {
                         />
                     </div>
                     <div className="col-sm-2 form-group">
-                        <label htmlFor="userName">User Name (Optional, will display instead of name)</label>
-                        <input
-                            value={user.userName || ""}
-                            onChange={e => setUser({ ...user, userName: e.target.value })}
-                            className="form-control"
-                            id="userName"
-                            name="userName"
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm-2 form-group">
-                        <label htmlFor="email">email</label>
+                        <label htmlFor="email">Email (Will not be displayed)</label>
                         <input
                             required
                             value={user.email}
@@ -155,8 +150,21 @@ function UserProfile() {
                             name="email"
                         />
                     </div>
+                </div>
+                <div className="row">
                     <div className="col-sm-2 form-group">
-                        <label htmlFor="title">Title (Optional)</label>
+                        <label htmlFor="userName">User Name (Optional, displays instead of name)</label>
+                        <input
+                            value={user.userName || ""}
+                            onChange={e => setUser({ ...user, userName: e.target.value })}
+                            className="form-control"
+                            id="userName"
+                            name="userName"
+                        />
+                    </div>
+                    
+                    <div className="col-sm-2 form-group">
+                        <label htmlFor="title">Title (Optional, displayed as "Name, Title")</label>
                         <input
                             value={user.title || "" }
                             onChange={e => setUser({ ...user, title: e.target.value })}
@@ -165,9 +173,11 @@ function UserProfile() {
                             name="title"
                         />
                     </div>
-                    <div className="col-sm-2 form-group">
-                        <label htmlFor="profession">Profession (Optional)</label>
-                        <input
+                </div>
+                <div className="row">
+                    <div className="col-sm-6 form-group">
+                        <label htmlFor="profession">Profession (Optional, first one will be displayed at top of page, separate each with comma)</label>
+                        <textarea
                             value={user.profession || ""}
                             onChange={e => setUser({ ...user, profession: e.target.value })}
                             className="form-control"
@@ -176,6 +186,19 @@ function UserProfile() {
                         />
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-sm-6 form-group">
+                        <label htmlFor="biography">Biography (Optional)</label>
+                        <textarea
+                            value={user.biography || ""}
+                            onChange={e => setUser({ ...user, biography: e.target.value })}
+                            className="form-control"
+                            id="biography"
+                            name="biography"
+                        />
+                    </div>
+                </div>
+                    
 
                 <h1>Skills Info</h1>
                 <p>Separate each skill with a comma</p>

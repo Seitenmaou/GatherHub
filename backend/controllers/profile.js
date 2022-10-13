@@ -12,7 +12,8 @@ router.post('/create', async (req, res) => {
         role: 'user',
         username: null,
         title: null,
-        profession: null,
+        profession: [""],
+        biography: null,
         skillList0:[""],
         skillList1:[""],
         skillList2:[""],
@@ -28,20 +29,17 @@ router.post('/create', async (req, res) => {
 
 router.put('/update', async (req, res) => {
     let {...rest} = req.body
-    let findById = req.body.id
+    let userId = req.body.id
     const user = await User.update({
         ...rest,
     },{
-        where: {id: findById }
+        where: {id: userId }
     })
     res.json(user)
 })
 
 
 router.get('/:userId', async (req, res) => {
-    console.log("REQ: " + req)
-    console.log("REQPARAMS: " + req.params)
-    console.log("REQPARAMSID: " + req.params.userId)
     let userId = Number(req.params.userId)
     if (isNaN(userId)) {
         res.status(404).json({ message: `Invalid id "${userId}"` })

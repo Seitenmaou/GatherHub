@@ -5,7 +5,6 @@ function SignUpForm() {
     
 	const navigate = useNavigate()
 
-// States for registration
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
@@ -16,14 +15,14 @@ function SignUpForm() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        await fetch(`${process.env.REACT_APP_SERVER_URL}users/create`, {
+        await fetch(`${process.env.REACT_APP_SERVER_URL}profile/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-        navigate(`/`)
+        navigate(`/login`)
     }
 
     return (

@@ -27,7 +27,7 @@ function Navigation() {
         loginActions = (
             <>
                 <li className="nav-item">
-                    <a className="nav-link active" href="/" onClick={() => localStorage.removeItem('jwt-token')}>
+                    <a className="nav-link active" href="/" onClick={() => sessionStorage.removeItem('jwt-token')}>
                         Logout
                     </a>
                 </li>
