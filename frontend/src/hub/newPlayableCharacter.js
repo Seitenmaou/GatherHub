@@ -5,16 +5,22 @@ import TestBot_Walk_Down from './character/TestBot_Walk_Down.gif'
 import TestBot_Walk_Left from './character/TestBot_Walk_Left.gif'
 import TestBot_Walk_Up from './character/TestBot_Walk_Up.gif'
 import TestBot_Walk_Right from './character/TestBot_Walk_Right.gif'
+import './hub.css'
 
 function newPlayableCharacter(x, y, id) {
 
     const element = document.createElement('a')
     element.href = `/profile/${id}`
+    element.title="TESTNAME"
     element.appendChild(newImage(TestBot_Idle, id))
  
     document.body.append(element)
 
     element.style.zIndex = 1;
+
+    const removeAvatar = () =>{
+        document.body.removeChild(element)
+    }
 
     // function handleDirectionChange(direction) {
     //     if (direction === null) {
@@ -37,7 +43,9 @@ function newPlayableCharacter(x, y, id) {
     move(element).withArrowKeys(x, y)//, handleDirectionChange)
 
     return {
-        element: element
+        element: element,
+        //return removal function
+        removeAvatar
     }
 }
 

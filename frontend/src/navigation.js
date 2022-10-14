@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from "react-router";
-import { CurrentUser } from './contexts/CurrentUser';
+import { CurrentUserContext } from './contexts/CurrentUser';
 
 function Navigation() {
 
     const navigate = useNavigate()
 
-    const { currentUser } = useContext(CurrentUser)
+    const { currentUser } = useContext(CurrentUserContext)
 
     let loginActions = (
         <>
@@ -27,7 +27,7 @@ function Navigation() {
         loginActions = (
             <>
                 <li className="nav-item">
-                    <a className="nav-link active" href="/" onClick={() => sessionStorage.removeItem('jwt-token')}>
+                    <a className="nav-link active" href="/" onClick={() => localStorage.removeItem('jwt-token')}>
                         Logout
                     </a>
                 </li>

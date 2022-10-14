@@ -1,17 +1,18 @@
 import { createContext, useState, useEffect } from "react";
 
 
-export const CurrentUser = createContext()
+const CurrentUserContext = createContext()
 
-function CurrentUserProvider({ children }) {
+const CurrentUserProvider= ({ children }) =>  {
 
     const [currentUser, setCurrentUser] = useState(null)
+    
     useEffect(() => {
 
         const getLoggedInUser = async () => {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}authentication/`, {
                 headers: {
-                    'Authorization': `Bearer ${sessionStorage.getItem('jwt-token')}`
+                    'Authorization': `Bearer ${localStorage.getItem('jwt-token')}`
                 }
             })
             let user = await response.json()
@@ -20,11 +21,15 @@ function CurrentUserProvider({ children }) {
         getLoggedInUser()
     }, [])
 
+
     return (
-        <CurrentUser.Provider value={{ currentUser, setCurrentUser }}>
+        <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
             {children}
-        </CurrentUser.Provider>
+        </CurrentUserContext.Provider>
     )
 }
 
-export default CurrentUserProvider
+export {
+    CurrentUserContext,
+    CurrentUserProvider
+}

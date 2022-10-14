@@ -5,7 +5,8 @@ import newPlayableCharacter from "./newPlayableCharacter"
 function GatherHub() {
 
   useEffect(() => {
-    const pc = newPlayableCharacter(100, 110, 1)
+    const {element, removeAvatar} = newPlayableCharacter(100, 110, 1)
+    return(()=>{removeAvatar()})
   }, [])
 
 

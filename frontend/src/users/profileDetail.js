@@ -1,13 +1,13 @@
 import  { useEffect, useState, useContext } from 'react';
 import {UNSAFE_DataRouterStateContext, useLocation} from 'react-router-dom'
-import { CurrentUser } from '../contexts/CurrentUser';
+import { CurrentUserContext } from '../contexts/CurrentUser';
 import {Chart, registerables} from 'chart.js'
 Chart.register(...registerables)
 
 
 function ProfileDetail() {
    
-   const currentUser = useContext(CurrentUser)
+   const currentUser = useContext(CurrentUserContext)
    const [user, setUser] = useState(currentUser)
    
    const [userDetails, setUserDetails] = useState(null)

@@ -1,20 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router"
-import { CurrentUser } from '../contexts/CurrentUser';
+import { CurrentUserContext } from '../contexts/CurrentUser';
 
 function UserProfile() {
-
-    const  {currentUser}  = useContext(CurrentUser)
     
-    const [user, setUser] = useState(currentUser)
-    const [tempSkillList, setTempSkillList]= useState([
-        user.skillList0,
-        user.skillList1,
-        user.skillList2,
-        user.skillList3,
-        user.skillList4,
-        user.skillList5
-    ])
+    const  {currentUser}  = useContext(CurrentUserContext)
+    
+    const [user, setUser] = useState(null)
+    const [tempSkillList, setTempSkillList]= useState(null)
 
     useEffect(() => {
         const getUserDetail = async () => {
@@ -22,16 +15,18 @@ function UserProfile() {
            const resData = await response.json()
            setUser(resData)
            setTempSkillList([
-            user.skillList0,
-            user.skillList1,
-            user.skillList2,
-            user.skillList3,
-            user.skillList4,
-            user.skillList5
+            resData.skillList0,
+            resData.skillList1,
+            resData.skillList2,
+            resData.skillList3,
+            resData.skillList4,
+            resData.skillList5
         ])
         }
-        getUserDetail()
-     },[currentUser.id])
+        if (currentUser){
+            getUserDetail()
+        }
+     },[currentUser])
 
 	const navigate = useNavigate()
 
@@ -51,7 +46,6 @@ function UserProfile() {
     }
 
     function placeSkillSettings(current, index){
-        
         return(
         <div className="col-sm-6 form-group" key={`skill-${skillCategories[index]}`}>
                     <label htmlFor={`skill-${skillCategories[index]}`} className='form-label'>{skillCategories[index]}</label>
@@ -108,7 +102,7 @@ function UserProfile() {
     }
 
 
-    if(!CurrentUser){
+    if(!currentUser|| !user){
         return<h1>Loading...</h1>}
 
     return (

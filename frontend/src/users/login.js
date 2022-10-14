@@ -1,12 +1,12 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router"
-import { CurrentUser } from "../contexts/CurrentUser"
+import { CurrentUserContext } from "../contexts/CurrentUser"
 
 function LoginForm() {
 
     const navigate = useNavigate()
 
-    const { setCurrentUser } = useContext(CurrentUser)
+    const { setCurrentUser } = useContext(CurrentUserContext)
 
     const [credentials, setCredentials] = useState({
         email: '',
@@ -29,7 +29,7 @@ function LoginForm() {
 
         if (response.status === 200) {
             setCurrentUser(data.user)
-            sessionStorage.setItem('jwt-token', data.token)
+            localStorage.setItem('jwt-token', data.token)
             navigate(`/`)
         } else {
             setErrorMessage(data.message)

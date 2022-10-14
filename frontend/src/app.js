@@ -3,7 +3,7 @@ import Home from './home'
 import SignUp from './users/signup'
 import Login from './users/login'
 import GatherHub from './hub/gatherhub';
-import CurrentUserProvider from './contexts/CurrentUser'
+import {CurrentUserProvider} from './contexts/CurrentUser'
 import Navigation from './navigation';
 import UserProfile from './users/profileEdit';
 import PrivateRoute from './privateroute/PrivateRoute'
