@@ -7,12 +7,13 @@ import TestBot_Walk_Up from './character/TestBot_Walk_Up.gif'
 import TestBot_Walk_Right from './character/TestBot_Walk_Right.gif'
 import './hub.css'
 
-function newPlayableCharacter(x, y, id) {
+function newPlayableCharacter(x, y, size, id) {
 
     const element = document.createElement('a')
     element.href = `/profile/${id}`
     element.title="TESTNAME"
-    element.appendChild(newImage(TestBot_Idle, id))
+    const avatar = newImage(TestBot_Idle, id, size)
+    element.appendChild(avatar)
  
     document.body.append(element)
 
@@ -22,29 +23,28 @@ function newPlayableCharacter(x, y, id) {
         document.body.removeChild(element)
     }
 
-    // function handleDirectionChange(direction) {
-    //     if (direction === null) {
-    //         element.src = TestBot_Idle
-    //     }
-    //     if (direction === 'left') {
-    //         element.src = TestBot_Walk_Left
-    //     }
-    //     if (direction === 'up') {
-    //         element.src = TestBot_Walk_Up
-    //     }
-    //     if (direction === 'right') {
-    //         element.src = TestBot_Walk_Right
-    //     }
-    //     if (direction === 'down') {
-    //         element.src = TestBot_Walk_Down
-    //     }
-    // }
-
-    move(element).withArrowKeys(x, y)//, handleDirectionChange)
+    function handleDirectionChange(direction) {
+        if (direction === null) {
+            avatar.src = TestBot_Idle
+        }
+        if (direction === 'left') {
+            avatar.src = TestBot_Walk_Left
+        }
+        if (direction === 'up') {
+            avatar.src = TestBot_Walk_Up
+        }
+        if (direction === 'right') {
+            avatar.src = TestBot_Walk_Right
+        }
+        if (direction === 'down') {
+            avatar.src = TestBot_Walk_Down
+        }
+    }
+    move(avatar).withArrowKeys(x,y, handleDirectionChange)
+    move(element).withArrowKeys(x, y)
 
     return {
         element: element,
-        //return removal function
         removeAvatar
     }
 }

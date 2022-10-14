@@ -47,7 +47,7 @@ function UserProfile() {
 
     function placeSkillSettings(current, index){
         return(
-        <div className="col-sm-6 form-group" key={`skill-${skillCategories[index]}`}>
+        <div className="col-sm-11 form-group m-2" key={`skill-${skillCategories[index]}`}>
                     <label htmlFor={`skill-${skillCategories[index]}`} className='form-label'>{skillCategories[index]}</label>
                     <input
                     className="form-control" 
@@ -107,11 +107,13 @@ function UserProfile() {
 
     return (
         <main>
+            <div className="d-flex flex-column m-5 justify-content-center border rounded border-dark">
             <form onSubmit={handleSubmit}>
-
+                <div className='row m-2'>
+                <div className='col-sm border rounded border-dark m-2'>
                 <h1>General Info</h1>
-                <div className="row">
-                    <div className="col-sm-2 form-group">
+                <div className="row mt-4">
+                    <div className="col-sm-3 form-group">
                         <label htmlFor="firstName">First Name</label>
                         <input
                             required
@@ -122,7 +124,7 @@ function UserProfile() {
                             name="firstName"
                         />
                     </div>
-                    <div className="col-sm-2 form-group">
+                    <div className="col-sm-3 form-group">
                         <label htmlFor="lastName">Last Name</label>
                         <input
                             required
@@ -133,8 +135,8 @@ function UserProfile() {
                             name="lastName"
                         />
                     </div>
-                    <div className="col-sm-2 form-group">
-                        <label htmlFor="email">Email (Will not be displayed)</label>
+                    <div className="col-sm-4 form-group">
+                        <label htmlFor="email">Email (Not displayed)</label>
                         <input
                             required
                             value={user.email}
@@ -145,8 +147,8 @@ function UserProfile() {
                         />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm-2 form-group">
+                <div className="row mt-4">
+                    <div className="col-sm-6 form-group">
                         <label htmlFor="userName">User Name (Optional, displays instead of name)</label>
                         <input
                             value={user.userName || ""}
@@ -157,7 +159,7 @@ function UserProfile() {
                         />
                     </div>
                     
-                    <div className="col-sm-2 form-group">
+                    <div className="col-sm-6 form-group">
                         <label htmlFor="title">Title (Optional, displayed as "Name, Title")</label>
                         <input
                             value={user.title || "" }
@@ -168,8 +170,8 @@ function UserProfile() {
                         />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm-6 form-group">
+                <div className="row mt-4">
+                    <div className="col-sm-12 form-group">
                         <label htmlFor="profession">Profession (Optional, first one will be displayed at top of page, separate each with comma)</label>
                         <textarea
                             value={user.profession || ""}
@@ -180,8 +182,8 @@ function UserProfile() {
                         />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm-6 form-group">
+                <div className="row mt-4">
+                    <div className="col-sm-12 form-group">
                         <label htmlFor="biography">Biography (Optional)</label>
                         <textarea
                             value={user.biography || ""}
@@ -192,15 +194,18 @@ function UserProfile() {
                         />
                     </div>
                 </div>
-                    
-
+                </div>
+                <div className='col-sm-6 border rounded border-dark m-2'>
                 <h1>Skills Info</h1>
                 <p>Separate each skill with a comma</p>
                 {skillCategories.map(placeSkillSettings)}
-
+                    
+                </div>
                 <input className="btn btn-primary" type="submit" value="Update/View Profile" />
-
+                </div>
             </form>
+            </div>
+
     </main>
     )
 }

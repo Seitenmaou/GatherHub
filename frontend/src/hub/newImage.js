@@ -1,10 +1,11 @@
 
 
-function newImage(url, id){
+function newImage(url, id, size){
     let image = document.createElement('img')
     image.src = url
+    if(size){image.width = 75}
     image.style.position = 'absolute'
-    //document.body.append(image)
+    if(id){image.id=`avatar-${id}`}
 
     return image
 }

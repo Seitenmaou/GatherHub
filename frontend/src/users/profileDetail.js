@@ -76,22 +76,22 @@ function ProfileDetail() {
    }
 },[userDetails])
 
-   function placeProfession(current, index){return(<p>{userDetails.profession[index]}</p>)}
+   function placeProfession(current, index){return(<p className="m-0" key={`profession-${index}`}>{userDetails.profession[index]}</p>)}
    
    if(!userDetails){return<h1>Loading...</h1>}
 
    return(
-      <div className="row">
-            <div className='col-sm-6'>
+      <div className="row ">
+            <div className='col-sm-6 border rounded border-dark'>
                <div className='card'>
-                  <div className='card'>
+                  <div className='card border rounded border-dark m-2 p-2'>
                      <h1>{(userDetails.userName||(userDetails.firstName + " " +userDetails.lastName)) + ", " + userDetails.title || ""}</h1>
                      <h4>{userDetails.profession[0] || ""}</h4>
                   </div>
-                  <div className='card'>
+                  <div className='card border rounded border-dark m-2 p-2'>
                      <p>{userDetails.biography}</p>
                   </div>
-                  <div className='card'>
+                  <div className='border rounded border-dark m-2 p-2'>
                      {userDetails.profession.map(placeProfession)}
                   </div>
                </div>
