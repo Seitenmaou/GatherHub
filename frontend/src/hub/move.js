@@ -1,9 +1,12 @@
 function move(element) {
     element.style.position = 'fixed'
+    let unitHoriz = 'px'
+    let unitVert = 'px'
+
 
     function moveToCoordinates(left, bottom) {
-        element.style.left = left + 'px'
-        element.style.bottom = bottom + 'px'
+        element.style.left = left + unitHoriz
+        element.style.bottom = bottom + unitVert
     }
 
     function moveWithArrowKeys(left, bottom, callback=()=>{}){
@@ -11,8 +14,8 @@ function move(element) {
         let x = left;
         let y = bottom;
 
-        element.style.left = x + 'px'
-        element.style.bottom = y + 'px'
+        element.style.left = x + unitHoriz
+        element.style.bottom = y + unitVert
         
         function moveCharacter(){ 
             if(direction === 'left'){
@@ -27,8 +30,8 @@ function move(element) {
             if(direction === 'down'){
                 y-=1
             }
-            element.style.left = x + 'px'
-            element.style.bottom = y + 'px'
+            element.style.left = x + unitHoriz
+            element.style.bottom = y + unitVert
         }
         
         setInterval(moveCharacter, 1)

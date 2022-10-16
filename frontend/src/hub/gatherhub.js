@@ -55,9 +55,6 @@ function GatherHub() {
     }
   }, [otherUsersData])
 
-
-
-
   const [isOnline, setOnline] = useState(false)
 
   useEffect(() => {
@@ -89,20 +86,36 @@ function GatherHub() {
   }
 
   if (currentUserData && otherUsersData){
+    const intervalSeconds = 1
+    const unitVert = 'px'
+    const unitHoriz = 'px'
     const interval = setInterval(() => {
-      var userAvatarPosition = document.getElementById(`avatar-${currentUserData.id}`).getBoundingClientRect();
-
-      currentUserData.hubPosition[0] = parseInt((userAvatarPosition.left))
-      currentUserData.hubPosition[1] = parseInt((userAvatarPosition.bottom))
+      let userAvatarPosition = document.getElementById(`avatar-${currentUserData.id}`)
+      currentUserData.hubPosition[0] = parseInt((userAvatarPosition.style.left))
+      currentUserData.hubPosition[1] = parseInt((userAvatarPosition.style.bottom))
       updatePosition()
       getOtherUsersData()
       otherUsersData.forEach((elem, ind, arr) => {
-        var otherUserAvatar = document.getElementById(`avatar-${otherUsersData[ind].id}`)
-        otherUserAvatar.style.left = parseInt(otherUsersData[ind].hubPosition[0]) + "px"
-        otherUserAvatar.style.top = parseInt(otherUsersData[ind].hubPosition[1]) + "px"
+        let otherUserAvatar = document.getElementById(`avatar-${otherUsersData[ind].id}`)
+        //distance = old location (local) - new (database)
+        let otherUserAvatarLocationDistanceX = parseInt(otherUserAvatar.style.left) - otherUsersData[ind].hubPosition[0]
+        let otherUserAvatarLocationDistanceY = parseInt(otherUserAvatar.style.bottom) - otherUsersData[ind].hubPosition[1]
+        //steps = distance / time
+      let steps = 10
+        let otherUserAvatarLocationStepPerSecondX = otherUserAvatarLocationDistanceX / steps
+        let otherUserAvatarLocationStepPerSecondY = otherUserAvatarLocationDistanceY / steps
+
+        //take steps
+        let stepsTaken = 0
+          const stepsCounter = setInterval(() => {
+            otherUserAvatar.style.left = parseInt(otherUserAvatar.style.left) - otherUserAvatarLocationStepPerSecondX + unitVert
+            otherUserAvatar.style.bottom = parseInt(otherUserAvatar.style.bottom) - otherUserAvatarLocationStepPerSecondY + unitHoriz
+            stepsTaken += 1
+            if (stepsTaken == steps){clearInterval(stepsCounter)}
+          }, 100)
       })
       
-    }, 5000);
+    }, intervalSeconds * 1000);
     return () => (clearInterval(interval), logOff())
 
   }

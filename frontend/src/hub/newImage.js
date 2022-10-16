@@ -5,7 +5,7 @@ function newImage(url, id, size){
     image.src = url
     if(size){image.width = 75}
     image.style.position = 'fixed'
-    if(id){image.id=`avatar-${id}`}
+    //if(id){image.id=`avatar-${id}`}
 
     return image
 }

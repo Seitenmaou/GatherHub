@@ -11,6 +11,7 @@ function newPlayableCharacter(x, y, size, userInfo) {
 
     const element = document.createElement('a')
     element.href = `/profile/${userInfo.id}`
+    element.id = `avatar-${userInfo.id}`
     element.title=(userInfo.userName||(userInfo.firstName+" "+userInfo.lastName))
     const avatar = newImage(TestBot_Idle, userInfo.id, size)
     element.appendChild(avatar)
