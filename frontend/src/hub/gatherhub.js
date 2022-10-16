@@ -23,39 +23,47 @@ function GatherHub() {
 
   useEffect(() => {
     if(currentUserData){
-      const {element, removeAvatar} = newPlayableCharacter(100, 110, 75, currentUserData)
+      const {element, removeAvatar} = newPlayableCharacter(parseInt(currentUserData.hubPosition[0]), parseInt(currentUserData.hubPosition[1]), 75, currentUserData)
+      
       return() => {removeAvatar()}
     }
   }, [currentUserData])
 
-  // useEffect(() => {
-  //   const getOtherUsersData = async () => {
-  //     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/getusers/${currentUserData.id}`)
-  //     const resData = await response.json()
-  //     setOtherUsersData(resData)
-  //   }
-  //   if(currentUserData){
-  //     getOtherUsersData()
-  //   }
+  useEffect(() => {
+    const getOtherUsersData = async () => {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/getusers/${currentUserData.id}`)
+      const resData = await response.json()
+      setOtherUsersData(resData)
+    }
+    if(currentUserData){
+      getOtherUsersData()
+    }
 
-  // },[currentUserData])
+  },[currentUserData])
 
-  // useEffect(() => {
-  //   if(otherUsersData && currentUserData){
-  //     otherUsersData.forEach((elem, ind, arr) => {
-  //         const avatarSize = 75
-  //         const windowWidth = Math.floor(Math.random() * (parseInt(window.innerWidth)-avatarSize))
-  //         const windowHeight = Math.floor(Math.random() * (parseInt(window.innerHeight)-avatarSize))
-  //         const {element, removeAvatar} = newNonPlayableCharacter(windowWidth, windowHeight, avatarSize, otherUsersData[ind])
-  //         return() => {removeAvatar()}
-  //     })
-  //   }
-  // }, [otherUsersData])
+  const [otherUsersAvatarSpawned, setOtherUsersAvatarSpawned ] = useState(false)
+
+  useEffect(() => {
+    if(otherUsersData && currentUserData && !otherUsersAvatarSpawned){
+      otherUsersData.forEach((elem, ind, arr) => {
+          const avatarSize = 75
+          const {element, removeAvatar} = newNonPlayableCharacter(parseInt(otherUsersData[ind].hubPosition[0]), parseInt(otherUsersData[ind].hubPosition[1]), avatarSize, otherUsersData[ind])
+          
+          return() => {removeAvatar()}
+      })
+      setOtherUsersAvatarSpawned(true)
+    }
+  }, [otherUsersData])
+
+
+
+
+  const [isOnline, setOnline] = useState(false)
 
   useEffect(() => {
     if (currentUserData){
-      currentUserData.isOnline = true
-
+      setOnline(true)
+      currentUserData.isOnline = isOnline
     }
 
     async function updatePosition() {
@@ -68,21 +76,38 @@ function GatherHub() {
       })
   }
     function logOff() {
-      if(currentUserData){
-        currentUserData.isOnline = false
+        if(currentUserData){
+          setOnline(false)
+          currentUserData.isOnline = isOnline
         updatePosition() 
       }
   }
+  const getOtherUsersData = async () => {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/getusers/${currentUserData.id}`)
+    const resData = await response.json()
+    setOtherUsersData(resData)
+  }
 
+  if (currentUserData && otherUsersData){
     const interval = setInterval(() => {
-      var rect = document.getElementById(`avatar-${currentUserData.id}`).getBoundingClientRect();
-      currentUserData.hubPosition[0] = rect.left
-      currentUserData.hubPosition[1] = rect.bottom
+      var userAvatarPosition = document.getElementById(`avatar-${currentUserData.id}`).getBoundingClientRect();
+
+      currentUserData.hubPosition[0] = parseInt((userAvatarPosition.left))
+      currentUserData.hubPosition[1] = parseInt((userAvatarPosition.bottom))
       updatePosition()
-    }, 2000);
+      getOtherUsersData()
+      otherUsersData.forEach((elem, ind, arr) => {
+        var otherUserAvatar = document.getElementById(`avatar-${otherUsersData[ind].id}`)
+        otherUserAvatar.style.left = parseInt(otherUsersData[ind].hubPosition[0]) + "px"
+        otherUserAvatar.style.top = parseInt(otherUsersData[ind].hubPosition[1]) + "px"
+      })
+      
+    }, 5000);
     return () => (clearInterval(interval), logOff())
 
-  }, [currentUserData]);
+  }
+
+  }, [currentUserData && otherUsersData]);
 
   
   if (!otherUsersData || !currentUserData){return(<h1>LOADING...</h1>)}

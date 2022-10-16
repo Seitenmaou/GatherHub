@@ -47,8 +47,8 @@ router.put('/update', async (req, res) => {
 
 router.get('/getusers/:userId', async (req, res) => {
     const users = await User.findAll({
-        attributes:['firstName','lastName','userName','hubPosition'],
-        where:{id:{[Op.not]:req.params.userId}},
+        attributes:['id','firstName','lastName','userName','hubPosition'],
+        where:{id:{[Op.not]:req.params.userId}, isOnline: true},
         order:[sequelize.fn('RANDOM')],
         limit: 2 })
     res.json(users)
