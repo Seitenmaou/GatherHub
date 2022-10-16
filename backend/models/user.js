@@ -30,7 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     skillList4: DataTypes.ARRAY(DataTypes.STRING),
     skillList5: DataTypes.ARRAY(DataTypes.STRING),
     skillLevel: DataTypes.ARRAY(DataTypes.SMALLINT),
-    maxSkillLevel: DataTypes.SMALLINT
+    maxSkillLevel: DataTypes.SMALLINT,
+    favorites: DataTypes.ARRAY(DataTypes.SMALLINT),
+    isOnline: DataTypes.BOOLEAN,
+    hubPosition: DataTypes.ARRAY(DataTypes.SMALLINT),
   }, {
     sequelize,
     modelName: 'User',

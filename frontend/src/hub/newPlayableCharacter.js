@@ -7,12 +7,12 @@ import TestBot_Walk_Up from './character/TestBot_Walk_Up.gif'
 import TestBot_Walk_Right from './character/TestBot_Walk_Right.gif'
 import './hub.css'
 
-function newPlayableCharacter(x, y, size, id) {
+function newPlayableCharacter(x, y, size, userInfo) {
 
     const element = document.createElement('a')
-    element.href = `/profile/${id}`
-    element.title="TESTNAME"
-    const avatar = newImage(TestBot_Idle, id, size)
+    element.href = `/profile/${userInfo.id}`
+    element.title=(userInfo.userName||(userInfo.firstName+" "+userInfo.lastName))
+    const avatar = newImage(TestBot_Idle, userInfo.id, size)
     element.appendChild(avatar)
  
     document.body.append(element)

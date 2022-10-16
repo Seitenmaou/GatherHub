@@ -21,6 +21,9 @@ module.exports = {
       skillList5:["Story writing practice, Drawing practice"],
       skillLevel:[1,4,1,1,2,2],
       maxSkillLevel:0,
+      isOnline: false,
+      hubPosition:[100, 100],
+      //favorites:[],
       passwordHash: await bcrypt.hash("12121212", 12),
       createdAt: new Date(),
       updatedAt: new Date()
@@ -42,6 +45,9 @@ module.exports = {
       skillList5:["PH1","PH2","PH3","PH4","PH5","PH6",],
       skillLevel:[1,2,3,4,5,6],
       maxSkillLevel:0,
+      isOnline: false,
+      hubPosition:[100, 100],
+      //favorites:[],
       passwordHash: await bcrypt.hash("12121212", 12),
       createdAt: new Date(),
       updatedAt: new Date()
@@ -62,6 +68,9 @@ module.exports = {
       skillList5:["Almighty","Almighty","Almighty","Almighty","Almighty","Almighty","Almighty","Almighty","Almighty"],
       skillLevel:[99,99,99,99,99,99],
       maxSkillLevel:0,
+      isOnline: false,
+      hubPosition:[100, 100],
+      //favorites:[],
       passwordHash: await bcrypt.hash("12121212", 12),
       createdAt: new Date(),
       updatedAt: new Date()
@@ -82,6 +91,9 @@ module.exports = {
       skillList5:[""],
       skillLevel:[0,0,0,0,0,0],
       maxSkillLevel:0,
+      isOnline: false,
+      hubPosition:[100, 100],
+      //favorites:[],
       passwordHash: await bcrypt.hash("12121212", 12),
       createdAt: new Date(),
       updatedAt: new Date()

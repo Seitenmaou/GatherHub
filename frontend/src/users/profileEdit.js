@@ -138,7 +138,7 @@ function UserProfile() {
                     <div className="col-sm-4 form-group">
                         <label htmlFor="email">Email (Not displayed)</label>
                         <input
-                            required
+                            disabled//required
                             value={user.email}
                             onChange={e => setUser({ ...user, email: e.target.value })}
                             className="form-control"

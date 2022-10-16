@@ -1,73 +1,100 @@
-function newNonPlayableCharacter(x, y) {
-    let element = newImage('assets/red-character/static.gif')
+import newImage from './newImage'
+import move from './move';
+import TestBot_Idle from './character/TestBot_Idle.gif'
+import TestBot_Walk_Down from './character/TestBot_Walk_Down.gif'
+import TestBot_Walk_Left from './character/TestBot_Walk_Left.gif'
+import TestBot_Walk_Up from './character/TestBot_Walk_Up.gif'
+import TestBot_Walk_Right from './character/TestBot_Walk_Right.gif'
+import './hub.css'
+
+function newNonPlayableCharacter(x, y, size, userInfo) {
+    const element = document.createElement('a')
+    element.href = `/profile/${userInfo.id}`
+    element.title=(userInfo.userName||(userInfo.firstName+" "+userInfo.lastName))
+    const avatar = newImage(TestBot_Idle, userInfo.id, size)
+    element.appendChild(avatar)
+ 
+    document.body.append(element)
+
     element.style.zIndex = 1;
+
+    const removeAvatar = () =>{
+        document.body.removeChild(element)
+    }
     
-    let direction = null;
+    // let direction = null;
 
-    function moveCharacter() {
-        if (direction === 'west') {
-            x -= 1
-        }
-        if (direction === 'north') {
-            y += 1
-        }
-        if (direction === 'east') {
-            x += 1
-        }
-        if (direction === 'south') {
-            y -= 1
-        }
-        element.style.left = x + 'px'
-        element.style.bottom = y + 'px'
-    }
+    // function moveCharacter() {
+    //     if (direction === 'left') {
+    //         x -= 1
+    //     }
+    //     if (direction === 'up') {
+    //         y += 1
+    //     }
+    //     if (direction === 'right') {
+    //         x += 1
+    //     }
+    //     if (direction === 'down') {
+    //         y -= 1
+    //     }
+    //     element.style.left = x + 'px'
+    //     element.style.bottom = y + 'px'
+    // }
 
-    setInterval(moveCharacter, 1)
+    // setInterval(moveCharacter, 1)
 
-    async function walkEast(time) {
-        direction = 'east'
-        element.src = `./assets/red-character/east.gif`
-        await sleep(time)
-        stop()
-    }
+    // async function walkRight(time) {
+    //     direction = 'right'
+    //     element.src = TestBot_Walk_Right
+    //     await sleep(time)
+    //     stop()
+    // }
 
-    async function walkNorth(time) {
-        direction = 'north'
-        element.src = `./assets/red-character/north.gif`
-        await sleep(time)
-        stop()
-    }
+    // async function walkUp(time) {
+    //     direction = 'up'
+    //     element.src = TestBot_Walk_Up
+    //     await sleep(time)
+    //     stop()
+    // }
 
-    async function walkWest(time) {
-        direction = 'west'
-        element.src = `./assets/red-character/west.gif`
-        await sleep(time)
-        stop()
-    }
+    // async function walkLeft(time) {
+    //     direction = 'left'
+    //     element.src = TestBot_Walk_Left
+    //     await sleep(time)
+    //     stop()
+    // }
 
-    async function walkSouth(time) {
-        direction = 'south'
-        element.src = `./assets/red-character/south.gif`
-        await sleep(time)
-        stop()
-    }
+    // async function walkDown(time) {
+    //     direction = 'down'
+    //     element.src = TestBot_Walk_Down
+    //     await sleep(time)
+    //     stop()
+    // }
 
-    function stop() {
-        direction = null
-        element.src = `./assets/red-character/static.gif`
-    }
+    // function stop() {
+    //     direction = null
+    //     element.src = TestBot_Idle
+    // }
+
+    move(element).to(x,y)
 
     return {
-        element: element,
-        walkWest: walkWest,
-        walkNorth: walkNorth,
-        walkEast: walkEast,
-        walkSouth: walkSouth,
-        stop: stop
+        // element: element,
+        // walkLeft: walkLeft,
+        // walkUp: walkUp,
+        // walkRight: walkRight,
+        // walkDown: walkDown,
+        // stop: stop,
+        removeAvatar
     }
 }
 
-function sleep(time){
-    return new Promise(resolve => {
-        setTimeout(resolve, time)
-    })
-}
+
+
+// function sleep(time){
+//     return new Promise(resolve => {
+//         setTimeout(resolve, time)
+//     })
+// }
+
+export default newNonPlayableCharacter

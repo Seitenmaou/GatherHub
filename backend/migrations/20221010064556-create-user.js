@@ -26,6 +26,9 @@ module.exports = {
       skillList5: {type:Sequelize.ARRAY(Sequelize.STRING)},
       skillLevel: {type:Sequelize.ARRAY(Sequelize.SMALLINT)},
       maxSkillLevel: {type:Sequelize.SMALLINT},
+      isOnline:{type:Sequelize.BOOLEAN},
+      hubPosition:{type:Sequelize.ARRAY(Sequelize.SMALLINT)},
+      favorites:{type:Sequelize.ARRAY(Sequelize.SMALLINT)},
       createdAt: {allowNull: false,type: Sequelize.DATE},
       updatedAt: {allowNull: false, type: Sequelize.DATE}
     });
