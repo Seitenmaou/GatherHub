@@ -6,6 +6,21 @@ const { useImperativeHandle } = require('react')
 
 const { User } = db
   
+router.post('/checkemail', async (req, res) => {
+    email = req.body.email
+    console.log("EMAIL: ", email)
+    let foundUser = await User.findOne({
+        where: {email: email}
+    })
+    if (foundUser){
+        res.status(409).json({ 
+            message: `User with this email already exists` 
+        })
+    } else {
+        res.json(foundUser)
+    }
+ })
+
 router.post('/', async (req, res) => {
     
     let user = await User.findOne({
@@ -25,5 +40,6 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
    res.json(req.currentUser)
 })
+
 
 module.exports = router

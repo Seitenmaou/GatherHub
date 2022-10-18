@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router"
 function SignUpForm() {
     
 	const navigate = useNavigate()
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const [user, setUser] = useState({
         firstName: '',
@@ -15,15 +16,31 @@ function SignUpForm() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        await fetch(`${process.env.REACT_APP_SERVER_URL}profile/create`, {
+        user.email = user.email.toLowerCase()
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}authentication/checkemail`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify({email: user.email})
         })
-        navigate(`/login`)
-    }
+        const data = await response.json()
+
+        if (response.status === 200) {
+           
+                await fetch(`${process.env.REACT_APP_SERVER_URL}profile/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                navigate(`/login`)
+            } else {
+                setErrorMessage(data.message)
+            }
+            
+        }
 
     return (
         <main>
@@ -31,6 +48,14 @@ function SignUpForm() {
                 <form onSubmit={handleSubmit}>
                         <div className="form-group">
                         <h1>Sign Up</h1>
+                        {errorMessage !== null
+                                ? (
+                                    <div className="alert alert-danger" role="alert">
+                                        {errorMessage}
+                                    </div>
+                                )
+                                : null
+                            }
                             <label htmlFor="firstName">First Name</label>
                             <input
                                 required
