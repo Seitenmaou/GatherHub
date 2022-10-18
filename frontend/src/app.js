@@ -11,6 +11,7 @@ import ProfileDetail from './users/profileDetail'
 import MessageBoard from './messageBoard/messageBoard';
 import MessageBoardDetail from './messageBoard/messageDetail';
 import MessageBoardNew from './messageBoard/messageBoardNew';
+import Error404 from './error404';
 
 function App() {
   return (
@@ -19,14 +20,15 @@ function App() {
       <Navigation/>
         <Routes>
           <Route path='/' element={<Home/>} />
-          <Route path='/gatherhub' element={<GatherHub/>}/>
+          <Route path='/gatherhub' element={<PrivateRoute><GatherHub/></PrivateRoute>}/>
           <Route path='/profile' element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
-          <Route path='/profile/:id' element={<ProfileDetail/>}/>
+          <Route path='/profile/:id' element={<PrivateRoute><ProfileDetail/></PrivateRoute>}/>
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/login' element={<Login/>} />
-          <Route path='/messageboard/' element={<MessageBoard/>}/>
-          <Route path='/messageboard/new' element={<MessageBoardNew/>}/>
-          <Route path='/messageboard/:id' element={<MessageBoardDetail/>}/>
+          <Route path='/messageboard/' element={<PrivateRoute><MessageBoard/></PrivateRoute>}/>
+          <Route path='/messageboard/new' element={<PrivateRoute><MessageBoardNew/></PrivateRoute>}/>
+          <Route path='/messageboard/:id' element={<PrivateRoute><MessageBoardDetail/></PrivateRoute>}/>
+          <Route path='*' element={<Error404/>}/>
         </Routes>
       </BrowserRouter>
     </CurrentUserProvider>
