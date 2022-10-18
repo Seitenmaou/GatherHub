@@ -1,5 +1,5 @@
 import  { useEffect, useState, useContext } from 'react';
-import {UNSAFE_DataRouterStateContext, useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import { CurrentUserContext } from '../contexts/CurrentUser';
 import {Chart, registerables} from 'chart.js'
 Chart.register(...registerables)
@@ -76,7 +76,10 @@ function ProfileDetail() {
    }
 },[userDetails])
 
-   function placeProfession(current, index){return(<p className="m-0" key={`profession-${index}`}>{userDetails.profession[index]}</p>)}
+   function placeProfession(current, index){
+      return(
+      <p className="m-0" key={`profession-${index}`}>{userDetails.profession[index]}</p>
+      )}
    
    if(!userDetails){return<h1>Loading...</h1>}
 

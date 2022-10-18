@@ -52,6 +52,11 @@ function Navigation() {
                         Profile
                     </a>
                 </li>
+                <li className="nav-item">
+                    <a className="nav-link active" href="#" onClick={() => navigate("/messageboard")}>
+                        MessageBoard
+                    </a>
+                </li>
                 {loginActions}
             </ul>
         </div>

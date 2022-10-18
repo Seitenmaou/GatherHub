@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/profile', require('./controllers/profile'))
 app.use('/authentication', require('./controllers/authentication'))
+app.use('/messageboard', require('./controllers/messageBoard'))
 
 // Listen for Connections
 app.listen(process.env.PORT, () => {

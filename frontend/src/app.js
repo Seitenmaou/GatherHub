@@ -8,6 +8,9 @@ import Navigation from './navigation';
 import UserProfile from './users/profileEdit';
 import PrivateRoute from './privateroute/PrivateRoute'
 import ProfileDetail from './users/profileDetail'
+import MessageBoard from './messageBoard/messageBoard';
+import MessageBoardDetail from './messageBoard/messageDetail';
+import MessageBoardNew from './messageBoard/messageBoardNew';
 
 function App() {
   return (
@@ -20,7 +23,10 @@ function App() {
           <Route path='/profile' element={<PrivateRoute><UserProfile/></PrivateRoute>}/>
           <Route path='/profile/:id' element={<ProfileDetail/>}/>
           <Route path='/signup' element={<SignUp/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/messageboard/' element={<MessageBoard/>}/>
+          <Route path='/messageboard/new' element={<MessageBoardNew/>}/>
+          <Route path='/messageboard/:id' element={<MessageBoardDetail/>}/>
         </Routes>
       </BrowserRouter>
     </CurrentUserProvider>

@@ -14,6 +14,7 @@ function newPlayableCharacter(x, y, size, userInfo) {
     element.id = `avatar-${userInfo.id}`
     element.title=(userInfo.userName||(userInfo.firstName+" "+userInfo.lastName))
     const avatar = newImage(TestBot_Idle, userInfo.id, size)
+    element.textContent = (userInfo.userName || (userInfo.firstName + " " + userInfo.lastName))
     element.appendChild(avatar)
  
     document.body.append(element)
@@ -41,7 +42,7 @@ function newPlayableCharacter(x, y, size, userInfo) {
             avatar.src = TestBot_Walk_Down
         }
     }
-    move(avatar).withArrowKeys(x,y, handleDirectionChange)
+    move(avatar).withArrowKeys(x,y+20, handleDirectionChange)
     move(element).withArrowKeys(x, y)
 
     return {
