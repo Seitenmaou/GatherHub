@@ -1,3 +1,5 @@
+//database migration for users
+
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

@@ -1,4 +1,4 @@
-
+//place image onto element
 
 function newImage(url, id, size){
     let image = document.createElement('img')

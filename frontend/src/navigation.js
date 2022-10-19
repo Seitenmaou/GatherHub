@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
+//navigation bar rendered on every page, changes on login status
+
+import {useContext } from 'react'
 import { useNavigate } from "react-router";
 import { CurrentUserContext } from './contexts/CurrentUser';
 
 function Navigation() {
-
     const navigate = useNavigate()
-
     const { currentUser } = useContext(CurrentUserContext)
 
     let loginActions = (

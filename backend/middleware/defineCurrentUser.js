@@ -1,6 +1,7 @@
+//middleware for current user using jwt
+
 const db = require("../models/")
 const jwt = require('json-web-token')
-
 const { User } = db;
 
 async function defineCurrentUser(req, res, next){

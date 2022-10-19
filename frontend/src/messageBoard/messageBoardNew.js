@@ -1,3 +1,5 @@
+//create new message board
+
 import  { useEffect, useState, useContext } from 'react';
 import {useLocation} from 'react-router-dom'
 import { useNavigate, useParams } from "react-router"
@@ -7,13 +9,12 @@ function MessageBoardNew() {
    const navigate = useNavigate()
    
    const {currentUser} = useContext(CurrentUserContext)
-   
    const currentMessagePath = useLocation().pathname.substring(1,useLocation().pathname.length)
    const currentMessageId = currentMessagePath.substring(13,currentMessagePath.length)
-
    const [messageBoardData, setMessageBoardData] = useState(null)
    const [currentUserData, setCurrentUserData] = useState(null)
 
+   //get user information
    useEffect(() => {
       const getUserData = async () =>{
         const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/${currentUser.id}`)
@@ -26,6 +27,7 @@ function MessageBoardNew() {
       }
     },[currentUser])
    
+    //send new info to db
    async function handleSubmit(e){
       e.preventDefault()
       console.log(currentUserData.id)
@@ -43,8 +45,8 @@ function MessageBoardNew() {
 
    }
 
+   //wait for user data before render
    if(!currentUserData){return<h1>Loading...</h1>}
-
 
    return(
     <form onSubmit={handleSubmit}>
@@ -70,8 +72,6 @@ function MessageBoardNew() {
                     name="messageDetail"
                 />
             </div>
-            
-            
         </div>
         <input className="btn btn-primary" type="submit" value={`Post new message board as ${currentUserData.firstName}`} />
         </div>

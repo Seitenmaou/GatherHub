@@ -1,3 +1,5 @@
+//model for message board, foreign key user id
+
 'use strict';
 const {
   Model

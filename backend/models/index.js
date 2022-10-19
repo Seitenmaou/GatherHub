@@ -1,3 +1,5 @@
+//generated via sequelize migration command
+
 'use strict';
 
 const fs = require('fs');

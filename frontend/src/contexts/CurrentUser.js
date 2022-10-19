@@ -1,14 +1,12 @@
+//current user session/jwt
+
 import { createContext, useState, useEffect } from "react";
-
-
 const CurrentUserContext = createContext()
 
 const CurrentUserProvider= ({ children }) =>  {
-
     const [currentUser, setCurrentUser] = useState(null)
     
     useEffect(() => {
-
         const getLoggedInUser = async () => {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}authentication/`, {
                 headers: {
@@ -20,7 +18,6 @@ const CurrentUserProvider= ({ children }) =>  {
         }
         getLoggedInUser()
     }, [])
-
 
     return (
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>

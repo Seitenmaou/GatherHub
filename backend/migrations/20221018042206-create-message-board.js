@@ -1,3 +1,5 @@
+//database migrations for message board
+
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

@@ -1,3 +1,5 @@
+//models for user, hasMany messageboard
+
 'use strict';
 const {
   Model

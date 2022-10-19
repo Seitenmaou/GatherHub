@@ -1,3 +1,4 @@
+//all routes not listed will lead here
 
 function Error404() {
     return (

@@ -1,15 +1,16 @@
+//gather hub, can see currently logged in users
+
 import { useEffect, useContext, useState, useRef}  from "react"
 import newPlayableCharacter from "./newPlayableCharacter"
 import newNonPlayableCharacter from './newNonPlayableCharacter'
 import { CurrentUserContext } from '../contexts/CurrentUser'
 
 function GatherHub() {
-
   const {currentUser} = useContext(CurrentUserContext)
   const [currentUserData, setCurrentUserData] = useState(null)
   const [otherUsersData, setOtherUsersData] = useState(null)
-  const [otherUserAvatarMonitor, setOtherUsersAvatarMonitor] = useState(null)
 
+  //track final position before logging off
   async function updatePosition() {
     let userAvatarPosition = document.getElementById(`avatar-${currentUserData.id}`)
     currentUserData.hubPosition[0] = parseInt((userAvatarPosition.style.left))
@@ -24,12 +25,13 @@ function GatherHub() {
     })
   }
 
+  //when user switches pages (TODO: does not trigger on browser close)
   function logOff() {
       currentUserData.isOnline = false
       updatePosition() 
   }
 
-
+//get current user info
   useEffect(() => {
     const getUserData = async () =>{
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/${currentUser.id}`)
@@ -41,6 +43,7 @@ function GatherHub() {
     }
   },[currentUser])
 
+  //generate avatar onto screen
   useEffect(() => {
     if(currentUserData){
       currentUserData.isOnline = true
@@ -50,6 +53,7 @@ function GatherHub() {
     }
   }, [currentUserData])
 
+  //get random users that are online
   useEffect(() => {
     const getOtherUsersData = async () => {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/getrandomusers/`)
@@ -62,8 +66,10 @@ function GatherHub() {
 
   },[currentUserData])
 
+  //generate avatars for other online users
   useEffect(() => {
     let removeOtherUsersAvatars =[]
+
     if(otherUsersData && currentUserData){
       otherUsersData.forEach((elem, ind, arr) => {
         if(otherUsersData[ind].isOnline&&(currentUserData.id != otherUsersData[ind].id)){
@@ -78,7 +84,9 @@ function GatherHub() {
     }
   }, [otherUsersData])
 
+  //get info of the newest messageboard
   const [messageBoardData, setMessageBoardData] = useState(null)
+  
   useEffect(() => {
     const getMessageBoardData = async () =>{
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}messageBoard/getallmessages`)
@@ -90,6 +98,7 @@ function GatherHub() {
     }
   },[currentUser])
 
+  //display message board
   function displayMessageBoard(current, index){
     return(
       <a href={`/messageboard/${messageBoardData[index].id}`} className='col-sm-2 border rounded border-dark m-2 p-2' key={`message-${index}`}>
@@ -98,6 +107,7 @@ function GatherHub() {
       )
     }
 
+    //wait for the datas to be fetched
  if (!currentUser || !otherUsersData || !messageBoardData){return (<h1>LOADING...</h1>)}
     return ( 
       <main>

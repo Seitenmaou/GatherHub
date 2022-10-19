@@ -1,3 +1,6 @@
+//collection of messages created by users
+//redirects to detailed page when clicked
+
 import { useEffect, useContext, useState, useRef}  from "react"
 import { CurrentUserContext } from '../contexts/CurrentUser'
 
@@ -5,6 +8,7 @@ function MessageBoard() {
 
   const {currentUser} = useContext(CurrentUserContext)
 
+  //get all message board from db
   const [messageBoardData, setMessageBoardData] = useState(null)
   useEffect(() => {
     const getMessageBoardData = async () =>{
@@ -17,6 +21,7 @@ function MessageBoard() {
     }
   },[currentUser])
 
+  //get current user info
   const [userDetails, setUserDetails] = useState(null)
    useEffect(() => {
       const getUserDetails = async () => {
@@ -29,7 +34,7 @@ function MessageBoard() {
       }
    },[messageBoardData])
 
-
+//iterate to display all message board
   function displayMessageBoard(current, index){
       
     const author = userDetails.find(x=>x.id == messageBoardData[0].authorId)
@@ -42,6 +47,7 @@ function MessageBoard() {
       )
     }
 
+    //wait for fetching to complete before render
  if (!messageBoardData || !userDetails){return (<h1>LOADING...</h1>)}
     return ( 
       <main>

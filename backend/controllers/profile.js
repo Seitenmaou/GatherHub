@@ -1,14 +1,14 @@
+//routes for user based things
+
 const router = require('express').Router()
 const db = require("../models")
 const bcrypt = require('bcrypt');
-
 const sequelize = require('../models').sequelize;
-
 const { User } = db
 
+//create new user
 router.post('/create', async (req, res) => {
     let {password, ...rest} = req.body
-    
     const user = await User.create({
         ...rest,
         role: 'user',
@@ -26,12 +26,12 @@ router.post('/create', async (req, res) => {
         maxSkillLevel:0,
         isOnline: false,
         hubPosition:[0,0],
-        //favorites:[null],
         passwordHash: await bcrypt.hash(password, 12)
     })
     res.json(user)
 })
 
+//update user details
 router.put('/update', async (req, res) => {
     let {...rest} = req.body
     let userId = req.body.id
@@ -60,8 +60,7 @@ router.get('/getusers/', async (req, res) => {
     res.json(users)
 })
 
-//fetches info  of user via id
-
+//fetches info of user via id
 router.get('/:userId', async (req, res) => {
     let userId = Number(req.params.userId)
     if (isNaN(userId)) {
@@ -96,8 +95,5 @@ router.get('/:userId', async (req, res) => {
         }
     }
 })
-
-
-
 
 module.exports = router

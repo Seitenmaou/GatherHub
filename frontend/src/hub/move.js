@@ -1,14 +1,17 @@
+//move generated user avatar to location and by control
+
 function move(element) {
     element.style.position = 'fixed'
     let unitHoriz = 'px'
     let unitVert = 'px'
 
-
+    //move to location
     function moveToCoordinates(left, bottom) {
         element.style.left = left + unitHoriz
         element.style.bottom = bottom + unitVert
     }
 
+    //move using arrow key
     function moveWithArrowKeys(left, bottom, callback=()=>{}){
         let direction = null;
         let x = left;
@@ -17,6 +20,7 @@ function move(element) {
         element.style.left = x + unitHoriz
         element.style.bottom = y + unitVert
         
+        //move by 1 pixel depending on direction
         function moveCharacter(){ 
             if(direction === 'left'){
                 x-=1
@@ -34,8 +38,10 @@ function move(element) {
             element.style.bottom = y + unitVert
         }
         
+        //set interval how often the avatar moves
         setInterval(moveCharacter, 1)
         
+        //use arrow keys to set direction
         document.addEventListener('keydown', function(e){
             if(e.repeat) return;
         
@@ -54,6 +60,7 @@ function move(element) {
             callback(direction)
         })
         
+        //stop moving if key is let go
         document.addEventListener('keyup', function(e){
             direction = null
             callback(direction)

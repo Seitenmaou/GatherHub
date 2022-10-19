@@ -1,3 +1,5 @@
+//detailed information of user
+
 import  { useEffect, useState, useContext } from 'react';
 import {useLocation} from 'react-router-dom'
 import { CurrentUserContext } from '../contexts/CurrentUser';
@@ -6,15 +8,13 @@ Chart.register(...registerables)
 
 
 function ProfileDetail() {
-   
    const currentUser = useContext(CurrentUserContext)
    const [user, setUser] = useState(currentUser)
-   
    const [userDetails, setUserDetails] = useState(null)
-   
    const currentUserPath = useLocation().pathname.substring(1,useLocation().pathname.length)
    const currentUserId = currentUserPath.substring(8,currentUserPath.length)
    
+   //get user info
    useEffect(() => {
       const getUserDetail = async () => {
          const response = await fetch(`${process.env.REACT_APP_SERVER_URL}${currentUserPath}`)
@@ -24,6 +24,7 @@ function ProfileDetail() {
       getUserDetail()
    },[currentUserId])
 
+   //display skill labels (TODO: make is customiseable?)
    const skillNameLabel = [
       "Art",
       "Science",
@@ -33,6 +34,7 @@ function ProfileDetail() {
       "Creativity"
    ]
 
+   //create visual graph via skill
    useEffect(()=> {
       if (userDetails){
          const setGraphMax = parseInt(userDetails.userMaxSkillLevel*3/2)
@@ -76,11 +78,13 @@ function ProfileDetail() {
    }
 },[userDetails])
 
+//iterate work expereince list to display
    function placeProfession(current, index){
       return(
       <p className="m-0" key={`profession-${index}`}>{userDetails.profession[index]}</p>
       )}
    
+      //wait for data before load
    if(!userDetails){return<h1>Loading...</h1>}
 
    return(
@@ -106,7 +110,6 @@ function ProfileDetail() {
          </div>
       </div>
    )
-
 }
 
 export default ProfileDetail

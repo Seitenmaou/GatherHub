@@ -1,14 +1,15 @@
+//edit own profile details
+
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router"
 import { CurrentUserContext } from '../contexts/CurrentUser';
 
 function UserProfile() {
-    
     const  {currentUser}  = useContext(CurrentUserContext)
-    
     const [user, setUser] = useState(null)
     const [tempSkillList, setTempSkillList]= useState(null)
 
+    //get user info
     useEffect(() => {
         const getUserDetail = async () => {
            const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/${currentUser.id}`)
@@ -27,9 +28,9 @@ function UserProfile() {
             getUserDetail()
         }
      },[currentUser])
-
 	const navigate = useNavigate()
 
+    //skill list default (TODO: make is customisable?)
     const skillCategories = [
         "Art",
         "Science",
@@ -39,12 +40,14 @@ function UserProfile() {
         "Creativity"
     ]
 
+    //temporary skill list to overwrite later
     function updateTempSkill(e, index){
         const oldTemp = [...tempSkillList]
         oldTemp[index] = e.target.value
         setTempSkillList(oldTemp)
     }
 
+    //overwrite skill with temp
     function placeSkillSettings(current, index){
         return(
         <div className="col-sm-11 form-group m-2" key={`skill-${skillCategories[index]}`}>
@@ -60,7 +63,7 @@ function UserProfile() {
         )
     }
     
-
+    //prepare and update everything before sending
     function prepUpdate(){//I hate this too, dont worry, ill find a recursive way eventually, IF POSTGRES ACCEPTED UNEVEN MULTIDIMETIONAL ARRAYS!!!!
 
         if (!Array.isArray(tempSkillList[0])){user.skillList0 = tempSkillList[0].split(",")}
@@ -86,9 +89,9 @@ function UserProfile() {
 
     }
 
+    //update profile detail
     async function handleSubmit(e) {
         e.preventDefault()
-
         prepUpdate()
 
         await fetch(`${process.env.REACT_APP_SERVER_URL}profile/update`, {
@@ -101,14 +104,14 @@ function UserProfile() {
         {navigate(`/profile/${user.id}`)}
     }
 
-
+    //wait for data before render
     if(!currentUser|| !user){
         return<h1>Loading...</h1>}
 
     return (
         <main>
             <div className="d-flex flex-column m-5 justify-content-center border rounded border-dark">
-            <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                 <div className='row m-2'>
                 <div className='col-sm border rounded border-dark m-2'>
                 <h1>General Info</h1>
@@ -138,7 +141,7 @@ function UserProfile() {
                     <div className="col-sm-4 form-group">
                         <label htmlFor="email">Email (Not displayed)</label>
                         <input
-                            disabled//required
+                            disabled
                             value={user.email}
                             onChange={e => setUser({ ...user, email: e.target.value })}
                             className="form-control"
@@ -158,7 +161,6 @@ function UserProfile() {
                             name="userName"
                         />
                     </div>
-                    
                     <div className="col-sm-6 form-group">
                         <label htmlFor="title">Title (Optional, displayed as "Name, Title")</label>
                         <input
@@ -204,7 +206,7 @@ function UserProfile() {
                 <input className="btn btn-primary" type="submit" value="Update/View Profile" />
                 </div>
             </form>
-            </div>
+        </div>
 
     </main>
     )

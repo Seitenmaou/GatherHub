@@ -1,3 +1,5 @@
+//filler data for users
+
 'use strict';
 const bcrypt = require('bcrypt')
 

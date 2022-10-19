@@ -1,3 +1,6 @@
+//detailed information of message board
+//users can comment on it
+
 import  { useEffect, useState, useContext } from 'react';
 import {useLocation} from 'react-router-dom'
 import { useNavigate, useParams } from "react-router"
@@ -5,15 +8,13 @@ import { CurrentUserContext } from '../contexts/CurrentUser';
 
 function MessageBoardDetail() {
    const navigate = useNavigate()
-   
    const {currentUser} = useContext(CurrentUserContext)
-   
    const currentMessagePath = useLocation().pathname.substring(1,useLocation().pathname.length)
    const currentMessageId = currentMessagePath.substring(13,currentMessagePath.length)
-
    const [messageBoardData, setMessageBoardData] = useState(null)
    const [currentUserData, setCurrentUserData] = useState(null)
 
+   // get current user info
    useEffect(() => {
       const getUserData = async () =>{
         const response = await fetch(`${process.env.REACT_APP_SERVER_URL}profile/${currentUser.id}`)
@@ -25,7 +26,7 @@ function MessageBoardDetail() {
       }
     },[currentUser])
 
-
+//get board information
    useEffect(() => {
       const getMessageBoardDetail = async () => {
          const response = await fetch(`${process.env.REACT_APP_SERVER_URL}${currentMessagePath}`)
@@ -35,6 +36,7 @@ function MessageBoardDetail() {
       getMessageBoardDetail()
    },[currentUserData])
 
+   //get board author info
    const [authorDetail, setAuthorDetail] = useState(null)
    useEffect(() => {
       const getAuthorDetail = async () => {
@@ -47,6 +49,7 @@ function MessageBoardDetail() {
       }
    },[messageBoardData])
 
+   //get other users info for comment render
    const [commenterDetails, setCommenterDetails] = useState(null)
    useEffect(() => {
       const getCommenterDetails = async () => {
@@ -59,26 +62,30 @@ function MessageBoardDetail() {
       }
    },[messageBoardData])
 
-
+//iterate for comment display
    function displayComments(){
       if (messageBoardData.comment){
          return (messageBoardData.comment.map(displayComment))
       }
    }
+   //display individual comment
    function displayComment(current, index, array){
       const commenter = commenterDetails.find(x=>x.id == messageBoardData.commenterId[index])
-      return(
-      <p className='m-0' key={`comment-${index}`}>{messageBoardData.comment[index]} - {(commenter.userName||(commenter.firstName+" "+commenter.lastName))}</p>
+      return(<div key={`comment-${index}`}>
+      <p className='m-0'>{messageBoardData.comment[index]}</p>
+      <a href={`/profile/${commenter.id}`}> - {(commenter.userName||(commenter.firstName+" "+commenter.lastName))}</a>
+      </div>
       )
    }
    
+   //update board info if comment is posted
    async function handleSubmit(e){
       e.preventDefault()
       let newComment = document.getElementsByName('newComment')[0].value
 
       if (!messageBoardData.comment){
          messageBoardData.comment = [newComment]
-         messageBoardData.commenter = [currentUserData.id]
+         messageBoardData.commenterId = [currentUserData.id]
       } else {
          messageBoardData.comment.push(newComment)
          messageBoardData.commenterId.push(currentUserData.id)
@@ -97,10 +104,9 @@ function MessageBoardDetail() {
          body: JSON.stringify(updateMessageBoard)
      })
      {navigate(`/messageboard/${currentMessageId}`)}
-
-
    }
 
+   //wait for fetch before render
    if(!currentUserData||!messageBoardData || !authorDetail ||! commenterDetails){return<h1>Loading...</h1>}
 
    return(
@@ -108,7 +114,9 @@ function MessageBoardDetail() {
          <h1>{messageBoardData.title}</h1>
             <div className='col-sm-5 border rounded border-dark m-2 p-2'>
                <h2>Details</h2>
-               <p>Posted by {(authorDetail.userName||(authorDetail.firstName +" "+ authorDetail.lastName))}</p>
+               <a href={`/profile/${authorDetail.id}`}>
+                  <p>Posted by {(authorDetail.userName||(authorDetail.firstName +" "+ authorDetail.lastName))}</p>
+               </a>
                <h5>{messageBoardData.content}</h5>
 
             </div>
