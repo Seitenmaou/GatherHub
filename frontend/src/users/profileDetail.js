@@ -85,7 +85,7 @@ function ProfileDetail() {
       )}
    
       //wait for data before load
-   if(!userDetails){return<h1>Loading...</h1>}
+   if(!userDetails){return<h1>LOADING...</h1>}
 
    return(
       <div className="row ">

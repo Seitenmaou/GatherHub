@@ -107,7 +107,7 @@ function MessageBoardDetail() {
    }
 
    //wait for fetch before render
-   if(!currentUserData||!messageBoardData || !authorDetail ||! commenterDetails){return<h1>Loading...</h1>}
+   if(!currentUserData||!messageBoardData || !authorDetail ||! commenterDetails){return<h1>LOADING...</h1>}
 
    return(
       <div className="row border rounded border-dark m-2 p-2">

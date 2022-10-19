@@ -25,6 +25,11 @@ app.use('/profile', require('./controllers/profile'))
 app.use('/authentication', require('./controllers/authentication'))
 app.use('/messageboard', require('./controllers/messageBoard'))
 
+// serve static front end in production mode
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, 'client', 'build')));
+}
+
 //listen at port
 app.listen(process.env.PORT, () => {
     console.log(`Listening on ${process.env.PORT}`)

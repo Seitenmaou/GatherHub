@@ -30,9 +30,7 @@ function MessageBoardNew() {
     //send new info to db
    async function handleSubmit(e){
       e.preventDefault()
-      console.log(currentUserData.id)
       messageBoardData. authorId = currentUserData.id
-      console.log(messageBoardData)
 
       await fetch(`${process.env.REACT_APP_SERVER_URL}messageboard/new`, {
          method: 'POST',
@@ -46,7 +44,7 @@ function MessageBoardNew() {
    }
 
    //wait for user data before render
-   if(!currentUserData){return<h1>Loading...</h1>}
+   if(!currentUserData){return<h1>LOADING...</h1>}
 
    return(
     <form onSubmit={handleSubmit}>
