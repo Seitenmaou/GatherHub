@@ -1,10 +1,10 @@
-#GatherHub
+# GatherHub
 Due note it is heavily WIP
 
 Think of a much more casual gathering while displaying your personal background!
 If youve played an mmorpg, then you know what its like, seeing fellow players professions!
 
-##Features (WIP, more to come soon!)
+## Features (WIP, more to come soon!)
 Sign up and Login to store your data
 Profile edit to customise your info
     - General Info
