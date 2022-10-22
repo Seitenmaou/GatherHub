@@ -69,10 +69,9 @@ function GatherHub() {
   //generate avatars for other online users
   useEffect(() => {
     let removeOtherUsersAvatars =[]
-
     if(otherUsersData && currentUserData){
       otherUsersData.forEach((elem, ind, arr) => {
-        if(otherUsersData[ind].isOnline&&(currentUserData.id != otherUsersData[ind].id)){
+        if(otherUsersData[ind].isOnline && (currentUserData.id != otherUsersData[ind].id)){
           const avatarSize = 75
           const {element, removeAvatar} = newNonPlayableCharacter(parseInt(otherUsersData[ind].hubPosition[0]), parseInt(otherUsersData[ind].hubPosition[1]), avatarSize, otherUsersData[ind])
           removeOtherUsersAvatars.push(removeAvatar)

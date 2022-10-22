@@ -14,10 +14,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(defineCurrentUser)
 
-//for porduction
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, 'public', 'build')));
-}
+// //for porduction
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, 'public', 'build')));
+// }
 
 // routes
 app.use(express.urlencoded({ extended: true }))

@@ -5,96 +5,105 @@ Think of a much more casual gathering while displaying your personal background!
 
 If youve played an mmorpg, then you know what its like, seeing fellow players professions!
 
+## Hosted on heroku https://gather-hub-back.herokuapp.com/
+
+## Credits
+- Front end: Me (Seitenmaou)
+- Back end: Me (Seitenmaou)
+- Database: Me (Seitenmaou)
+
 ## Features (WIP, more to come soon!)
-Sign up and Login to store your data
+- Sign up and Login to store your data
 
-Profile edit to customise your info
+- Profile edit to customise your info
 
-    - General Info
+  - General Info
 
-        - First and last name, or if you add a user name, that will be displayed instead
+    - First and last name, or if you add a user name, that will be displayed instead
 
-        - Title, add a title following your name, could be a menacing one, or a professional one
+    - Title, add a title following your name, could be a menacing one, or a professional one
+
+    - Profession, separated by commas, your first one will be displayed on your name, and the rest will be displayed in lower areas
         
-        - Profession, separated by commas, your first one will be displayed on your name, and the rest will be displayed in lower areas
-        
-        - Biography, any other information you might want to add
+    - Biography, any other information you might want to add
     
-    - Skill Info
+  - Skill Info
     
-        - There are 6 fields you can add skills to
+    - There are 6 fields you can add skills to
     
-        - Hard Skills: Art, Science, Athletics
+    - Hard Skills: Art, Science, Athletics
     
-        - Soft Skills: Communication, Organization, Creativity
+    - Soft Skills: Communication, Organization, Creativity
     
-        - You can add multiple ones to each field, separated by a comma
+    - You can add multiple ones to each field, separated by a comma
     
-        - The more you add, larger the skills graph (explained later)
+    - The more you add, larger the skills graph (explained later)
     
-    - Upcomming/Planned
+  - Upcomming/Planned
     
-        - Cusomizable buttons to embed links
+    - Cusomizable buttons to embed links
     
-        - Customizable skill fields and amount
+    - Customizable skill fields and amount
     
-        - Photo, avatar creation?
+    - Photo, avatar creation?
 
-View Profiles, yours and others!
+- View Profiles, yours and others!
 
-    - Displays the above details, some are hidden
+  - Displays the above details, some are hidden
 
-        - If you have a user name, first and last name is hidden
+    - If you have a user name, first and last name is hidden
 
-    - Displayes the skills in a visual radial graph
+  - Displayes the skills in a visual radial graph
 
-    -Upcomming/Planned
+  - Upcomming/Planned
 
-        - Save favories/ add friends?
+    - Save favories/ add friends?
 
-        - Display avatar/photo?
+    - Display avatar/photo? (and create/edit avatar?)
 
-Message Board
+- Message Board
 
-    - A list of message boards
+  - A list of message boards
 
-        - Each one is essentially a forum, where you can write a title and description, or a request
+    - Each one is essentially a forum, where you can write a title and description, or a request
 
-        - Others, or yourself, can comment on it
+    - Others, or yourself, can comment on it
 
-    - Upcoming/Planned
+  - Upcoming/Planned
 
-        - Photo handling?
+    - Photo handling?
 
-GatherHub
+    - Might be replaced with global chat?
 
-    - See the latest update on the message board
+- GatherHub
 
-    - See current users online, wandering the hub
+  - See the latest update on the message board
 
-    - you can move around too!
+  - See current users online, wandering the hub
 
-    - Upcoming/Planned
+  - you can move around too!
 
-        - Upgrade the looks...definately
+  - Upcoming/Planned
 
-        - global chat with live updates
+    - Upgrade the looks...definately
 
-        - avatar movement with live updates
+    - global chat with live updates
+
+    - avatar movement with live updates
 
 ## Technology used
 
-Front
+- Front
 
-    - React
+  - React
 
-    - Bootstrap
+  - Bootstrap
 
-Back
+- Back
 
-    - Express
+  - Express
 
-    - Node
+  - Node
 
 Database
 
@@ -104,7 +113,8 @@ Database
 
 ## Bugs
 
-    Occasional routing issues (WIP) fixes on refresh
+ - Occasional routing issues (WIP) fixes on refresh
 
-    Occasional rendering issues (WIP) fixes on refresh
-    
+ - Occasional rendering issues (WIP) fixes on refresh
+
+ - Back end is currently not connected due to it linking to localhost instead

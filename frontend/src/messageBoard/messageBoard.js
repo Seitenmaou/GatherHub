@@ -37,7 +37,7 @@ function MessageBoard() {
 //iterate to display all message board
   function displayMessageBoard(current, index){
       
-    const author = userDetails.find(x=>x.id == messageBoardData[0].authorId)
+    const author = userDetails.find(x=>x.id == messageBoardData[index].authorId)
     return(
       <a href={`/messageboard/${messageBoardData[index].id}`} className='border rounded border-dark m-2 p-2' key={`message-${index}`}>
         {messageBoardData[index].title}

@@ -92,7 +92,7 @@ function ProfileDetail() {
             <div className='col-sm-6 border rounded border-dark'>
                <div className='card'>
                   <div className='card border rounded border-dark m-2 p-2'>
-                     <h1>{(userDetails.userName||(userDetails.firstName + " " +userDetails.lastName)) + ", " + userDetails.title || ""}</h1>
+                     <h1>{(userDetails.userName||(userDetails.firstName + " " +userDetails.lastName)) + ((", " + userDetails.title) || "")}</h1>
                      <h4>{userDetails.profession[0] || ""}</h4>
                   </div>
                   <div className='card border rounded border-dark m-2 p-2'>

@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/Seitenmaou/GatherHub#readme",
   "workspaces":[
-    "client",
-    "server"
+    "backend",
+    "frontend"
   ]
 
 }

@@ -46,7 +46,7 @@ router.put('/update', async (req, res) => {
 //fetches random and simpler user data
 router.get('/getrandomusers/', async (req, res) => {
     const users = await User.findAll({
-        attributes:['id','firstName','lastName','userName','hubPosition'],
+        attributes:['id','firstName','lastName','userName','hubPosition', 'isOnline'],
         order:[sequelize.fn('RANDOM')],
         limit: 5 })
     res.json(users)
