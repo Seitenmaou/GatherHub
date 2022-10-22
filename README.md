@@ -105,11 +105,11 @@ If youve played an mmorpg, then you know what its like, seeing fellow players pr
 
   - Node
 
-Database
+- Database
 
-    - Sequelize
+  - Sequelize
 
-    - Postgres
+  - Postgres
 
 ## Bugs
 
