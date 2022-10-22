@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "gather",
   "main": "index.js",
-  "engines":{"node": "16.15.0"},
+  "engines": {
+    "node": "16.15.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently 'cd backend && npm start' 'cd frontend && npm start'"
   },
   "repository": {
     "type": "git",
@@ -17,9 +20,11 @@
     "url": "https://github.com/Seitenmaou/GatherHub/issues"
   },
   "homepage": "https://github.com/Seitenmaou/GatherHub#readme",
-  "workspaces":[
+  "workspaces": [
     "backend",
     "frontend"
-  ]
-
+  ],
+  "dependencies": {
+    "concurrently": "^7.5.0"
+  }
 }
