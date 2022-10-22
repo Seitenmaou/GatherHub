@@ -21,6 +21,7 @@ let sequelize;
 //  sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 sequelize = new Sequelize(DATABASE_URL);
+console.log(DATABASE_URL)
 
 fs
   .readdirSync(__dirname)
