@@ -15,12 +15,12 @@ const db = {};
 const DATABASE_URL = process.env.DATABASE_URL
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
- sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-// sequelize = new Sequelize(DATABASE_URL);
+// if (config.use_env_variable) {
+//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
+// } else {
+//  sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
+sequelize = new Sequelize(DATABASE_URL);
 
 fs
   .readdirSync(__dirname)
