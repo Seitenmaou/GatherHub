@@ -6,6 +6,7 @@ Think of a much more casual gathering while displaying your personal background!
 If youve played an mmorpg, then you know what its like, seeing fellow players professions!
 
 ## Hosted on heroku https://gather-hub-back.herokuapp.com/
+### NOTE: Backend in progress
 
 ## Credits
 - Front end: Me (Seitenmaou)
